@@ -4,7 +4,7 @@ Documented cloud security investigations, built in a live Azure tenant
 (Mad Hat Labs, a multi-user training environment).
 
 Target role: Cloud Security Analyst
-Currently: [Systems Specialist] | [OR]
+Currently: [Systems Specialist] 
 Contact: [jamisons12@protonmail.com] · [LinkedIn URL]
 
 ## Investigations
