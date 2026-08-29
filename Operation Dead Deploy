@@ -8,9 +8,13 @@ Intern with temporary contributer access deployed a test enviornment without fol
 Live multi-user Azure training tenant, Reader access
 
 ## Investigation
-1) Looked at the list of Resource Groups, there was one resource group that didn't follow the standard naming convention. 
+1) Looked at the list of Resource Groups, there was one resource group that didn't follow the standard naming convention.
+
+![Alt text](https://github.com/jts-cloud/security-portfolio/blob/d2b38f258239274b3ec5a0e9cdb5d9c7b6606120/Images/Resource%20Manager%20Blade.png)
 
 2) In the Overview Blade of the outlier Resource Group, there was only one resource listed. 
+
+
 
 3) Looked at tags in the tag blade of the single resource and found an Owner tag that identified the intern as the owner of the resource.
 
