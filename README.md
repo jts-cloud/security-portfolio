@@ -5,7 +5,7 @@ Documented cloud security investigations, built in a live Azure tenant
 
 Target role: Cloud Security Analyst
 Currently: [Systems Specialist] 
-Contact: [jamisons12@protonmail.com] · [LinkedIn URL]
+Contact: [jamisons12@protonmail.com] · [Linkedin](https://www.linkedin.com/in/jamison-schwerdtfeger/)
 
 ## Investigations
 | # | Title | Focus | Write-up |
