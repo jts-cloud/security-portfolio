@@ -1,4 +1,4 @@
-# Investigating a Suspicious deployment in Azure.
+ # Investigating a Suspicious deployment in Azure.
 
 ## Scenario
 Intern with temporary contributer access deployed a test enviornment without following the company governance standards. The investigation revealed what the intern had deployed in the subscription.
