@@ -9,7 +9,7 @@ Live multi-user Azure training tenant, Reader access
 
 ## Investigation
 1) Looked at the list of Resource Groups, there was one resource group that didn't follow the standard naming convention.
-![Screenshot](Images/Resource-Manager-Blade.png)
+![Screenshot](https://github.com/jts-cloud/security-portfolio/blob/037c82d83a3d37e4dfd95c1644152cbedc760103/Images/Resource-Manager-Blade.png)
 
 2) In the Overview Blade of the outlier Resource Group, there was only one resource listed. 
 ![Screenshot](Images/Deployments-Blade.png)
