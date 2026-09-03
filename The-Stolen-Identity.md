@@ -1,12 +1,14 @@
-# [Title, outcome-flavored: "Investigating an Identity Attack in Entra ID"]
+# Investigating an Identity Attack in Entra ID
 
 ## Scenario
-2 to 3 sentences. What was the situation and what question did the investigation answer? Frame it like a work ticket, not homework.
+Reconstructed a five-stage OAuth consent-phishing kill chain in a live Azure tenant through forensic analysis of two linked app registrations. 
 
 ## Environment
-One list: platform, services, tools, access level. Honest framing: "live multi-user Azure training tenant, Reader access."
+live multi-user Azure training tenant, Reader access
 
 ## Investigation
+1) 
+
 The core. Numbered steps IN YOUR OWN WORDS: what you looked at, what you found, what you concluded at each step. 6 to 12 screenshots of meaningful moments (portal views, query results, before/after).
 
 ## What broke / what surprised me
