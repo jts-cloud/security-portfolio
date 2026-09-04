@@ -10,7 +10,7 @@ Contact: [jamisons12@protonmail.com] · [Linkedin](https://www.linkedin.com/in/j
 ## Investigations
 | # | Title | Focus | Write-up |
 |---|-------|-------|----------|
-| 1 | Operation Dead Deploy | Governance forensics, deployment audit trail | [Week 1](https://github.com/jts-cloud/security-portfolio/blob/main/Operation%20Dead%20Deploy) |
+| 1 | Operation Dead Deploy | Governance forensics, deployment audit trail | [Week 1]([https://github.com/jts-cloud/security-portfolio/blob/main/Operation%20Dead%20Deploy](https://github.com/jts-cloud/security-portfolio/blob/main/Operation-Dead-Deploy.md)) |
 | 2 | The Stolen Identity | App registration attack kill chain (Entra ID) | coming, week 2 |
 | 3 | Privilege Audit | RBAC and least privilege | coming, week 3 |
 | 4 | Spin Up and Lock Down | Compute attack surface | coming, week 4 |
