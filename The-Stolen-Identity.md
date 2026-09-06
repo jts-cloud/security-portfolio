@@ -10,18 +10,18 @@ Live multi-user Azure training tenant, Reader access
 1) ENTRY. A user was phished, completed MFA, and had the resulting session token stolen. Since the session token was already authenticated, the environment treated the attacker as an authenticated user, bypassing conditional access. The phished user was also an Owner on a legacy connector app.
 
 2) ESCALATE. Using the Owner rights, the attacker created a new client secret on the legacy app. That secret let them authenticate through the client credentials flow as the service principal itself, inheiriting the app's directory permisisons without ever signing in as a user. 
-![Image showing Client Secret is set to year 2099]()
+![Image showing Client Secret is set to year 2099](https://github.com/jts-cloud/security-portfolio/blob/e87b2f8b2942efd350a51cdc59995bcd3d673209/Images/Lab02/Lab02-img1.png)
 
 3) PIVOT. A secret expires when it gets rotated. The attacker had registered their own app (every standard user can do this by default in Entra) and added its service principal to the legacy app's Owners List. Now they can re-credential the legacy app forever, even after the first secret is caught. 
 
-![Image showing Rouge App]()
+![Image showing Rouge App](https://github.com/jts-cloud/security-portfolio/blob/e87b2f8b2942efd350a51cdc59995bcd3d673209/Images/Lab02/Lab02-img2.png)
 
 4) PERSIST. The attack had created a backup plan: a custom scope published on the legacy app's Expose an API blade. This turns the legacy app into a callable backend resource, which means the attacker's own app can request delgated access to it.  
-![Image showing Rouge scope set by attacker]()
+![Image showing Rouge scope set by attacker](https://github.com/jts-cloud/security-portfolio/blob/e87b2f8b2942efd350a51cdc59995bcd3d673209/Images/Lab02/Lab02-img3.png)
 
 5) LOOT. Finally, a redirect URI on the rouge app pointing at an attacker-controlled infrastructure. Combining the rouge app's client ID, that redirect URI, and the exposed API scope crafts a working phishing URL. A victim who is already signed in on a corperate device clicks Accept on a consent prompt, and the authorization code lands on the attacker's server. 
 
-![Image showing working attacker's phishing URL]()
+![Image showing working attacker's phishing URL](https://github.com/jts-cloud/security-portfolio/blob/e87b2f8b2942efd350a51cdc59995bcd3d673209/Images/Lab02/Lab02-img4.png)
 
 Even though the attacker's methods seem a bit convoluted, there is a method to the madness. Ordinary credential phishing runs the risk of being thwarted by device compliance, MFA prompting for authentication, and location rules. Consent phishing bypasses all of it, because the victim is already authenticated on a trusted device. The resulting OAuth2PermissionGrant is not removed by a password reset, not removed by revoking sessions, and not removed by enforcing MFA. Most standard containment playbooks leave it in place. This type of attack is called a confused deputy attack, where a trusted tool (automation script,administrative tool, or a priviledged service account) that's manipulated into executing a malicous command outside of it's intended function.      
 
