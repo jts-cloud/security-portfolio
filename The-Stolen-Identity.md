@@ -1,4 +1,4 @@
-# Investigating a confused Deputy Attack
+# Investigating an Identity-Based Breach
 
 ## Scenario
 Reconstructed a five-stage OAuth consent-phishing kill chain in a live Azure tenant through forensic analysis of two linked app registrations.
@@ -7,9 +7,23 @@ Reconstructed a five-stage OAuth consent-phishing kill chain in a live Azure ten
 Live multi-user Azure training tenant, Reader access
 
 ## Investigation
-1) 
+1) ENTRY. A user was phished, completed MFA, and had the resulting session token stolen. Since the session token was already authenticated, the environment treated the attacker as an authenticated user, bypassing conditional access. The phished user was also an Owner on a legacy connector app.
 
-The core. Numbered steps IN YOUR OWN WORDS: what you looked at, what you found, what you concluded at each step. 6 to 12 screenshots of meaningful moments (portal views, query results, before/after).
+2) ESCALATE. Using the Owner rights, the attacker created a new client secret on the legacy app. That secret let them authenticate through the client credentials flow as the service principal itself, inheiriting the app's directory permisisons without ever signing in as a user. 
+![Image showing Client Secret is set to year 2099]()
+
+3) PIVOT. A secret expires when it gets rotated. The attacker had registered their own app (every standard user can do this by default in Entra) and added its service principal to the legacy app's Owners List. Now they can re-credential the legacy app forever, even after the first secret is caught. 
+
+![Image showing Rouge App]()
+
+4) PERSIST. The attack had created a backup plan: a custom scope published on the legacy app's Expose an API blade. This turns the legacy app into a callable backend resource, which means the attacker's own app can request delgated access to it.  
+![Image showing Rouge scope set by attacker]()
+
+5) LOOT. Finally, a redirect URI on the rouge app pointing at an attacker-controlled infrastructure. Combining the rouge app's client ID, that redirect URI, and the exposed API scope crafts a working phishing URL. A victim who is already signed in on a corperate device clicks Accept on a consent prompt, and the authorization code lands on the attacker's server. 
+
+![Image showing working attacker's phishing URL]()
+
+Even though the attacker's methods seem a bit convoluted, there is a method to the madness. Ordinary credential phishing runs the risk of being thwarted by device compliance, MFA prompting for authentication, and location rules. Consent phishing bypasses all of it, because the victim is already authenticated on a trusted device. The resulting OAuth2PermissionGrant is not removed by a password reset, not removed by revoking sessions, and not removed by enforcing MFA. Most standard containment playbooks leave it in place. This type of attack is called a confused deputy attack, where a trusted tool (automation script,administrative tool, or a priviledged service account) that's manipulated into executing a malicous command outside of it's intended function.      
 
 ## What broke / what surprised me
 I was surprised that a standard user can register an app by default, and that owning an app registration is essentially considered an unlogged priviledge path that an audit of Global Admins would completely miss. 
