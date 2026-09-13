@@ -1,0 +1,45 @@
+# The-Privledge-Audit
+
+## Executive Summary
+The purpose of this cybersecurity audit was to assess who had permission to 
+
+## Scope and Methodology
+
+### In scope
+* Azure IAM users, roles, and permissions.
+
+
+### Methodlogy
+
+| Method               | Sees                                        | Misses                              |
+|----------------------|---------------------------------------------|-------------------------------------|
+| IAM blade / export   | Active assignments at scope, inherited      | Group members, orphaned principals  |
+| Azure CLI            | Same, plus empty principalName (orphans)    | One scope per run                   |
+| Resource Graph (KQL) | Entire tenant in one query                  | Eligible assignments                |
+| PIM export           | Eligible vs active, activation history      | Assignments outside PIM             |
+
+## What broke / what surprised me
+The most credible section in the document. Dead ends, wrong guesses, the thing that took an hour. Employers know real work is messy. This section separates you from certificate collectors.
+
+## Findings and recommendations
+
+Access Control (IAM) blade and the role assignment export. The no-tooling baseline. Shows every principal with access at a scope, including inherited grants. Blind spot: it lists groups but not their members, and it tends to bury the orphaned "Identity not found" assignments.
+
+
+
+Azure CLI. Same data, but scriptable and repeatable, and it surfaces what the portal hides: an assignment whose principalName comes back empty. That is a deleted account whose permissions were never revoked. Blind spot: one scope per run.
+
+
+
+Azure Resource Graph with KQL. Checks the entire tenant in a single query instead of one scope at a time. Blind spot: it only sees ACTIVE assignments.
+
+
+
+Privileged Identity Management export. The only method that shows eligible versus active, plus the activation history of who elevated, when, and why. Blind spot: it does not cover standing assignments that were never brought under PIM.
+
+
+
+The Hunt. Synthesis, word of the day, fancy word for combining knowledge of different facets of Azure to answer a question. You activate an eligible role and go find the over-provisioned account yourself, with no instructions.
+
+## What I learned
+3 to 5 bullets. At least one technical, one "what I'd do differently."
