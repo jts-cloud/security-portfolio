@@ -27,6 +27,7 @@ Sees: Active Assignments at scope, inherited
 Blindspot: It lists groups but not their members, and it usually buries the orphaned "Identity not found" assignments. 
 
 ![Image of .csv export showing every principal with access at a scope](Images/Lab03/lab03-1.png)
+![Image of orphan account](Images/Lab03/lab03-2.1.png)
 
 Severity Rank: High
 
