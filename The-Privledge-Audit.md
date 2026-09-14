@@ -1,4 +1,4 @@
-# The-Privledge-Audit
+# The-Priviledge-Audit
 
 ## Scope and Methodology
 
