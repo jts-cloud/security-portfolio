@@ -1,13 +1,10 @@
 # The-Privledge-Audit
 
-## Executive Summary
-The purpose of this cybersecurity audit was to assess who had permission to 
-
 ## Scope and Methodology
 
 ### In scope
-* Azure IAM users, roles, and permissions.
-
+* Mad Hat Labs tenant 
+* Reader,Operative Access
 
 ### Methodlogy
 
@@ -18,28 +15,91 @@ The purpose of this cybersecurity audit was to assess who had permission to
 | Resource Graph (KQL) | Entire tenant in one query                  | Eligible assignments                |
 | PIM export           | Eligible vs active, activation history      | Assignments outside PIM             |
 
-## What broke / what surprised me
-The most credible section in the document. Dead ends, wrong guesses, the thing that took an hour. Employers know real work is messy. This section separates you from certificate collectors.
-
 ## Findings and recommendations
 
-Access Control (IAM) blade and the role assignment export. The no-tooling baseline. Shows every principal with access at a scope, including inherited grants. Blind spot: it lists groups but not their members, and it tends to bury the orphaned "Identity not found" assignments.
+
+### Access Control (IAM) blade and the role assignment export
+
+Finding: Redundant Owner roles across multiple resources.
+
+Sees: Active Assignments at scope, inherited
+
+Blindspot: it lists groups but not their members, and it usually buries the orphaned "Identity not found" assignments. 
+
+[Image of .csv export showing every principal with access at a scope]()
+
+Severity Rank: High
+
+Reasoning of Severity Rank: In current conditions,the redundant Owner role designations would result in a giant blast radius if a user with the Owner role is compromised.  
+
+Recommendation: Replace redundant Owner grants with the narrowest job-function role at the narrowest scope. 
+
+### Azure CLI
+
+Finding: Orphaned account found 
+
+Sees: Same information as IAM Blade, plus empty principalName (orphan accounts)
+
+Blind spot: It can only run one scope at a time
+
+[Image of Azure CLI Command]()
+
+Severity Rank: High
+
+Reasoning of Severity Rank: An orphaned account is when a role assignment is still active when the tied principal has been deleted. Azure doesn't store the principal name, but the GUID. If anything recreated a principal with that exact same ID, the permissions from the active role assignment would still be in play and applied to that principal. An orphaned account has potential for abuse for a dormant account with access that isn't being monitored.  
+
+Recommendation: Revoke orphaned assignment. 
+
+### Azure Resource Graph with KQL 
+
+Finding:
+
+Sees: Checks the entire tenant in a single query instead of one scope at a time.
+
+Blindspot: It only sees ACTIVE assignments.
+
+[Image]()
+
+Severity Rank:
+
+Reasoning of Severity Rank:
+
+Recommendation:
 
 
 
-Azure CLI. Same data, but scriptable and repeatable, and it surfaces what the portal hides: an assignment whose principalName comes back empty. That is a deleted account whose permissions were never revoked. Blind spot: one scope per run.
+### Privileged Identity Management export
+
+Finding: User account found to have permanent active assignment. 
+
+Sees: The only method that shows eligible versus active
+
+Blindspot: Does not cover standing assignments that were never brought under PIM
+
+[Image]()
+
+Severity Rank: High
+
+Reasoning of Severity Rank: Permanent active assignment to a user leaves the door open for a malicious actor to gain access to highly sensitive resources.  
+
+Recommendation: Create new Group or assign user to a group that has an eligible role assignment to the resource group. This would increase visbility and monitoring to see who accessed what, and when. Utilzing the just-in-time model prevents malicious actor from performing priviledged tasks, decreasing the blast radius while giving an authorized user the access needed as required. 
 
 
 
-Azure Resource Graph with KQL. Checks the entire tenant in a single query instead of one scope at a time. Blind spot: it only sees ACTIVE assignments.
+### The Hunt
+ 
+ Finding:
 
+ [Image]()
 
+ Severity Rank: High
 
-Privileged Identity Management export. The only method that shows eligible versus active, plus the activation history of who elevated, when, and why. Blind spot: it does not cover standing assignments that were never brought under PIM.
+ Reasoning of Severity Rank: 
 
-
-
-The Hunt. Synthesis, word of the day, fancy word for combining knowledge of different facets of Azure to answer a question. You activate an eligible role and go find the over-provisioned account yourself, with no instructions.
+ Recommendation: Move standing privileged access to PIM-eligible with MFA, justification, and time limits. 
+ 
 
 ## What I learned
-3 to 5 bullets. At least one technical, one "what I'd do differently."
+* Each tool for auditing has different advantages and downsides.
+* Disabling a principal will not automatically disable the tied role assignment. Must be through about disabling users and permissions. 
+* Audit reports are similiar to investigation reports, but have a bigger focus on documenting findings. 
