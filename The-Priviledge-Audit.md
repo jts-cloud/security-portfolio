@@ -20,81 +20,81 @@
 
 ### Access Control (IAM) blade and the role assignment export
 
-Finding: Redundant Owner roles across multiple resources.
+**Finding:** Redundant Owner roles across multiple resources.
 
-Sees: Active Assignments at scope, inherited
+**Sees:** Active Assignments at scope, inherited
 
-Blindspot: It lists groups but not their members, and it usually buries the orphaned "Identity not found" assignments. 
+**Blindspot:** It lists groups but not their members, and it usually buries the orphaned "Identity not found" assignments. 
 
 ![Image of .csv export showing every principal with access at a scope](Images/Lab03/lab03-1.png)
 
 
-Severity Rank: High
+**Severity Rank:** High
 
-Reasoning of Severity Rank: In current conditions,the redundant Owner role designations would result in a giant blast radius if a user with the Owner role is compromised.  
+**Reasoning of Severity Rank:** In current conditions,the redundant Owner role designations would result in a giant blast radius if a user with the Owner role is compromised.  
 
-Recommendation: Replace redundant Owner grants with the narrowest job-function role at the narrowest scope. 
+**Recommendation:** Replace redundant Owner grants with the narrowest job-function role at the narrowest scope. 
 
 ### Azure CLI
 
-Finding: Orphaned account found 
+**Finding:** Orphaned account found 
 
-Sees: Same information as IAM Blade, plus empty principalName (orphan accounts)
+**Sees:** Same information as IAM Blade, plus empty principalName (orphan accounts)
 
-Blind spot: It can only run one scope at a time
+**Blind spot:** It can only run one scope at a time
 
 ![Image of Azure CLI Command](Images/Lab03/lab03-2.png)
 ![Image of orphan account](Images/Lab03/lab03-2.1.png)
 
-Severity Rank: High
+**Severity Rank:** High
 
-Reasoning of Severity Rank: An orphaned account is when a role assignment is still active when the tied principal has been deleted. Azure doesn't store the principal name, but the GUID. If anything recreated a principal with that exact same ID, the permissions from the active role assignment would still be in play and applied to that principal. An orphaned account has potential for abuse for a dormant account with access that isn't being monitored.  
+**Reasoning of Severity Rank:** An orphaned account is when a role assignment is still active when the tied principal has been deleted. Azure doesn't store the principal name, but the GUID. If anything recreated a principal with that exact same ID, the permissions from the active role assignment would still be in play and applied to that principal. An orphaned account has potential for abuse for a dormant account with access that isn't being monitored.  
 
-Recommendation: Revoke orphaned assignment. 
+**Recommendation:** Revoke orphaned assignment. 
 
 ### Azure Resource Graph with KQL 
 
-Finding: Orphaned account found through KQL query.
+**Finding:** Orphaned account found through KQL query.
 
-Sees: Checks the entire tenant in a single query instead of one scope at a time.
+**Sees:** Checks the entire tenant in a single query instead of one scope at a time.
 
-Blindspot: It only sees ACTIVE assignments.
+**Blindspot:** It only sees ACTIVE assignments.
 
 ![Image](Images/Lab03/lab03-3.png)
 
-Severity Rank:High
+**Severity Rank:** High
 
-Reasoning of Severity Rank: Same as Reasoned above
+**Reasoning of Severity Rank:** Same as Reasoned above
 
-Recommendation: Same as above; Revoke orphaned assignment.
+**Recommendation:** Same as above; Revoke orphaned assignment.
 
 ### Privileged Identity Management export
 
-Finding: User account found to have permanent active assignment. 
+**Finding:** User account found to have permanent active assignment. 
 
-Sees: The only method that shows eligible versus active
+**Sees:** The only method that shows eligible versus active
 
-Blindspot: Does not cover standing assignments that were never brought under PIM
+**Blindspot:** Does not cover standing assignments that were never brought under PIM
 
 ![Image](Images/Lab03/lab03-4.png)
 
-Severity Rank: High
+**Severity Rank:** High
 
-Reasoning of Severity Rank: Permanent active assignment to a user leaves the door open for a malicious actor to gain access to highly sensitive resources.  
+**Reasoning of Severity Rank:** Permanent active assignment to a user leaves the door open for a malicious actor to gain access to highly sensitive resources.  
 
-Recommendation: Create new Group or assign user to a group that has an eligible role assignment to the resource group. This would increase visbility and monitoring to see who accessed what, and when. Utilzing the just-in-time model prevents malicious actor from performing priviledged tasks, decreasing the blast radius while giving an authorized user the access needed as required. 
+**Recommendation:** Create new Group or assign user to a group that has an eligible role assignment to the resource group. This would increase visbility and monitoring to see who accessed what, and when. Utilzing the just-in-time model prevents malicious actor from performing priviledged tasks, decreasing the blast radius while giving an authorized user the access needed as required. 
 
 ### The Hunt
  
- Finding: Over-provisioned account that is assigned Owner of a hidden resource group. 
+ **Finding:** Over-provisioned account that is assigned Owner of a hidden resource group. 
 
  ![Image](Images/Lab03/lab03-5.png)
 
- Severity Rank: High
+ **Severity Rank:** High
 
- Reasoning of Severity Rank: 
+ **Reasoning of Severity Rank:** Not only is there little to no visibility to monitoring for this hidden resource group, the Over-provisioned user account could allow malicious actors to access sensitive resources.   
 
- Recommendation: Move standing privileged access to PIM-eligible with MFA, justification, and time limits. 
+ **Recommendation:** Move standing privileged access to PIM-eligible with MFA, justification, and time limits. 
  
 
 ## What I learned
