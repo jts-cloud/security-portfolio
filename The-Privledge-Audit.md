@@ -26,7 +26,7 @@ Sees: Active Assignments at scope, inherited
 
 Blindspot: it lists groups but not their members, and it usually buries the orphaned "Identity not found" assignments. 
 
-[Image of .csv export showing every principal with access at a scope](Images/Lab03/lab03-1.png)
+![Image of .csv export showing every principal with access at a scope](Images/Lab03/lab03-1.png)
 
 Severity Rank: High
 
@@ -42,7 +42,7 @@ Sees: Same information as IAM Blade, plus empty principalName (orphan accounts)
 
 Blind spot: It can only run one scope at a time
 
-[Image of Azure CLI Command](Images/Lab03/lab03-2.png)
+![Image of Azure CLI Command](Images/Lab03/lab03-2.png)
 
 Severity Rank: High
 
@@ -58,7 +58,7 @@ Sees: Checks the entire tenant in a single query instead of one scope at a time.
 
 Blindspot: It only sees ACTIVE assignments.
 
-[Image](Images/Lab03/lab03-3.png)
+![Image](Images/Lab03/lab03-3.png)
 
 Severity Rank:
 
@@ -76,7 +76,7 @@ Sees: The only method that shows eligible versus active
 
 Blindspot: Does not cover standing assignments that were never brought under PIM
 
-[Image](Images/Lab03/lab03-4.png)
+![Image](Images/Lab03/lab03-4.png)
 
 Severity Rank: High
 
@@ -90,7 +90,7 @@ Recommendation: Create new Group or assign user to a group that has an eligible 
  
  Finding:
 
- [Image](Images/Lab03/lab03-5.png)
+ ![Image](Images/Lab03/lab03-5.png)
 
  Severity Rank: High
 
