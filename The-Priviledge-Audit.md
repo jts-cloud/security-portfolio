@@ -54,7 +54,7 @@ Recommendation: Revoke orphaned assignment.
 
 ### Azure Resource Graph with KQL 
 
-Finding:
+Finding: Orphaned account found through KQL query.
 
 Sees: Checks the entire tenant in a single query instead of one scope at a time.
 
@@ -62,13 +62,11 @@ Blindspot: It only sees ACTIVE assignments.
 
 ![Image](Images/Lab03/lab03-3.png)
 
-Severity Rank:
+Severity Rank:High
 
-Reasoning of Severity Rank:
+Reasoning of Severity Rank: Same as Reasoned above
 
-Recommendation:
-
-
+Recommendation: Same as above; Revoke orphaned assignment.
 
 ### Privileged Identity Management export
 
@@ -86,11 +84,9 @@ Reasoning of Severity Rank: Permanent active assignment to a user leaves the doo
 
 Recommendation: Create new Group or assign user to a group that has an eligible role assignment to the resource group. This would increase visbility and monitoring to see who accessed what, and when. Utilzing the just-in-time model prevents malicious actor from performing priviledged tasks, decreasing the blast radius while giving an authorized user the access needed as required. 
 
-
-
 ### The Hunt
  
- Finding:
+ Finding: Over-provisioned account that is assigned Owner of a hidden resource group. 
 
  ![Image](Images/Lab03/lab03-5.png)
 
