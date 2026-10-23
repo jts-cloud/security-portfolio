@@ -14,7 +14,7 @@ Contact: [jamisons12@protonmail.com] · [Linkedin](https://www.linkedin.com/in/j
 | 2 | The Stolen Identity | App registration attack kill chain (Entra ID) | [Week 2](https://github.com/jts-cloud/security-portfolio/blob/e9e3b1cccce1572fe7b7b71619c189ba25506c79/The-Stolen-Identity.md) |
 | 3 | Privilege Audit | RBAC and least privilege |  [Week 3](https://github.com/jts-cloud/security-portfolio/blob/cdadf13afb93a6a3f18284156a7db093122435dd/The-Privledge-Audit.md) |
 | 4 | Spin Up and Lock Down | Compute attack surface |  [Week 4](Spin-up-and-Lock-down.md) |
-| 5 | Network the Operative | Network segmentation | coming, week 5 |
+| 5 | Network the Operative | Network segmentation |  [Week 5](Network-like-an-Operative.md) |
 | 6 | Bucket Looting | Storage exposure hunting | coming, week 6 |
 | 7 | Find the Anomaly | Log analysis and KQL | coming, week 7 |
 | 8 | Hunt the Threat | SIEM operations (Sentinel) | coming, week 8 |
