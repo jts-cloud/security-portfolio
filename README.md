@@ -13,7 +13,7 @@ Contact: [jamisons12@protonmail.com] · [Linkedin](https://www.linkedin.com/in/j
 | 1 | Operation Dead Deploy | Governance forensics, deployment audit trail | [Week 1](https://github.com/jts-cloud/security-portfolio/blob/66c7426f7d4426182ea172686c6975b09ec8e6e0/Operation-Dead-Deploy.md) |
 | 2 | The Stolen Identity | App registration attack kill chain (Entra ID) | [Week 2](https://github.com/jts-cloud/security-portfolio/blob/e9e3b1cccce1572fe7b7b71619c189ba25506c79/The-Stolen-Identity.md) |
 | 3 | Privilege Audit | RBAC and least privilege |  [Week 3](https://github.com/jts-cloud/security-portfolio/blob/cdadf13afb93a6a3f18284156a7db093122435dd/The-Privledge-Audit.md) |
-| 4 | Spin Up and Lock Down | Compute attack surface | coming, week 4 |
+| 4 | Spin Up and Lock Down | Compute attack surface |  [Week 4](Spin-up-and-Lock-down.md) |
 | 5 | Network the Operative | Network segmentation | coming, week 5 |
 | 6 | Bucket Looting | Storage exposure hunting | coming, week 6 |
 | 7 | Find the Anomaly | Log analysis and KQL | coming, week 7 |
