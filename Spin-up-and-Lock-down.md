@@ -1,4 +1,4 @@
-# The Friday Deploy
+# Spin up and Lock down
 
 ## Context and Scope
 * A new service deployed by an intern late Friday into a lab resource group, reviewed before promotion to production.
